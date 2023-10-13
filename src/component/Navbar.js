@@ -1,14 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-export class Navbar extends Component {
-  render() {
+const Navbar = () => {
+  const [country, setCountry] = useState("us")
+
+  const changeCountry = (cd) => {
+    if (cd == 1) {
+      console.log("I am india")
+      setCountry("in")
+    } else {
+      console.log("I am us")
+      setCountry("us")
+    }
+  }
+  
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to="/">
               News Monkey
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -23,19 +35,30 @@ export class Navbar extends Component {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
-                    Home
-                  </a>
+                  <Link className="nav-link" aria-current="page" to={`${country}/`}>Home</Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Link
-                  </a>
+                  <Link className="nav-link" to={`${country}/business`}>Business</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`${country}/entertainment`}>Entertainment</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`${country}/health`}>Health</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`${country}/science`}>Science</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`${country}/sports`}>sports</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={`${country}/technology`}>Technology</Link>
                 </li>
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
-                    href="#"
+
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -44,29 +67,28 @@ export class Navbar extends Component {
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
+
+                      <button className="dropdown-item" onClick={() => changeCountry(1)}>
+                        <Link to={`${country == "in" ? "in" : "in"}/`}>
+                          India
+                        </Link>
+                      </button>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
+
+                      <button className="dropdown-item" onClick={() => changeCountry(2)}>
+                        <Link to={`${country =="us"?"us":"us"}/`}>
+                          United State
+                        </Link>
+                      </button>
+
                     </li>
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link disabled" aria-disabled="true">
+                  <Link className="nav-link disabled" aria-disabled="true">
                     Disabled
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <form className="d-flex" role="search">
@@ -84,8 +106,7 @@ export class Navbar extends Component {
           </div>
         </nav>
       </div>
-    );
-  }
+    )
 }
 
 export default Navbar;
